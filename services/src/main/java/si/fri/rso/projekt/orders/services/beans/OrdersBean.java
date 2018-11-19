@@ -24,4 +24,8 @@ public class OrdersBean {
     private void init() {
         httpClient = ClientBuilder.newClient();
     }
+
+    public String getOrders() {
+        return "<list> orders";
+    }
 }

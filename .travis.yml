@@ -13,11 +13,10 @@ cache:
   directories:
   - $HOME/.m2
 
-
 script:
 - mvn clean package -U
-- docker build -t gsas/rso-orders .
+- docker build -t gsas/rso-orders:latest .
 
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-- docker push gsas/rso-orders
+- docker push gsas/rso-orders:latest
