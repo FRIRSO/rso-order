@@ -16,8 +16,8 @@ cache:
 
 script:
 - mvn clean package -U
-- docker build -t gsas/rso-buyers .
+- docker build -t gsas/rso-orders .
 
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-- docker push gsas/rso-buyers
+- docker push gsas/rso-orders
