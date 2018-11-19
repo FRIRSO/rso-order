@@ -11,6 +11,7 @@
 
     <artifactId>api</artifactId>
 
+
     <build>
         <plugins>
             <plugin>
@@ -28,8 +29,12 @@
             </plugin>
         </plugins>
     </build>
-
     <dependencies>
+        <dependency>
+            <groupId>si.fri.rso.projekt</groupId>
+            <artifactId>services</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.kumuluz.ee</groupId>
             <artifactId>kumuluzee-core</artifactId>
@@ -55,17 +60,6 @@
             <artifactId>kumuluzee-discovery-etcd</artifactId>
             <version>1.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>2.0-PFD2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>si.fri.rso.projekt</groupId>
-            <artifactId>services</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
+
 </project>
