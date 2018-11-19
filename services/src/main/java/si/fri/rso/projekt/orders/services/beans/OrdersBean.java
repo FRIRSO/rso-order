@@ -10,7 +10,7 @@ public class OrdersBean {
 
     private Client httpClient;
 
-    //@Inject
+    //@Inject asd
     //private AppProperties appProperties;
 
     //@Inject
