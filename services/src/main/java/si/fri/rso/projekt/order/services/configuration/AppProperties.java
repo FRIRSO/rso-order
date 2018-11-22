@@ -6,6 +6,8 @@ import com.kumuluz.ee.configuration.cdi.ConfigValue;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
+
+//dev->1.0->config->app-properties->external-services-> enabled : true / false
 @ConfigBundle("app-properties")
 public class AppProperties {
     @ConfigValue(value = "external-services.enabled", watch = true)

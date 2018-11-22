@@ -27,7 +27,7 @@ public class OrderBean {
     private AppProperties appProperties;
 
     @Inject
-    @DiscoverService("rso-order")
+    @DiscoverService("rso-buyer")
     private Optional<String> baseurl;
 
     @PostConstruct
@@ -54,7 +54,7 @@ public class OrderBean {
         if(baseurl.isPresent()) {
             try {
                 return httpClient
-                        .target(baseurl.get() + "/v1/drugaTest/url2")
+                        .target(baseurl.get() + "/v1/buyers")
                         .request()
                         .get(String.class);
             }
@@ -63,7 +63,6 @@ public class OrderBean {
                 return e.getMessage();
             }
         }
-
 
         return "baseUrl is not present!";
     }
