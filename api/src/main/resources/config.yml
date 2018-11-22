@@ -9,10 +9,10 @@ kumuluzee:
       port: 8082
   config:
     etcd:
-      hosts: http://192.168.1.135:2379
+      hosts: http://localhost:2379
   discovery:
     etcd:
-      hosts: http://192.168.1.135:2379
+      hosts: http://localhost:2379
     ttl: 60
     ping-interval: 60
 app-properties:
