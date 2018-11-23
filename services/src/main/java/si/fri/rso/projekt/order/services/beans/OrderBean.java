@@ -3,6 +3,8 @@ package si.fri.rso.projekt.order.services.beans;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import si.fri.rso.projekt.order.services.configuration.AppProperties;
+import si.fri.rso.projekt.orders.models.MongoOrder;
+import si.fri.rso.projekt.orders.models.Order;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -11,6 +13,7 @@ import javax.ws.rs.ProcessingException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -36,27 +39,17 @@ public class OrderBean {
         objectMapper = new ObjectMapper();
     }
 
-    public String getMessage() {
-        return "Hello from module ORDER!";
-    }
-
     public String readConfig() {
-
-        String output = "";
-        if(appProperties.isExternalServicesEnabled())
-            output += "ext service enabled!";
-
-        output += appProperties.externalServicesNameOne() + "\t" + appProperties.externalServicesNameTwo();
-        return output;
+        if (appProperties.isExternalServicesEnabled())
+            return "ext service enabled!";
+        return "ext service disabled";
     }
+
 
     public void setConfig(boolean config) {
         appProperties.setExternalServicesEnabled(config);
     }
 
-    public void setuserNameOne(String userNameOne) { appProperties.externalServicesNameOne(userNameOne);}
-
-    public void setuserNameTwo(String userNameTwo) { appProperties.externalServicesNameTwo(userNameTwo);}
 
     public String getMessageDiscovery(){
         if(url.isPresent()) {
@@ -73,5 +66,23 @@ public class OrderBean {
         }
 
         return "baseUrl is not present!";
+    }
+
+    public List<Order> getOrders() {
+        MongoOrder mb = new MongoOrder();
+
+        return mb.getAllOrders();
+    }
+
+    public Order getOrder(Integer orderID) {
+        MongoOrder mb = new MongoOrder();
+
+        Order order = mb.getOrder(orderID);
+
+        if(orderID == null) {
+            return null;
+        }
+
+        return order;
     }
 }

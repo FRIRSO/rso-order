@@ -18,6 +18,3 @@ kumuluzee:
 app-properties:
   external-services:
     enabled: false
-    baseUrl: http://localhost:8082
-    nameOne: gs8150
-    nameTwo: as4813

@@ -1,32 +1,21 @@
 package si.fri.rso.projekt.order.api.v1.resources;
 
 import si.fri.rso.projekt.order.services.beans.OrderBean;
+import si.fri.rso.projekt.orders.models.Order;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @RequestScoped
-@Path("order")
+@Path("orders")
 public class OrderApi {
 
     @Inject
     private OrderBean orderBean;
 
-    @GET
-    @Produces("text/plain")
-    public String hello() {
-        return "Hello from kumuluze. its working!";
-    }
-
-    @GET
-    @Path("discovery")
-    public Response disc() {
-
-        String returnMsg = orderBean.getMessage();
-        return Response.status(Response.Status.OK).entity(returnMsg).build();
-    }
 
     @GET
     @Path("url")
@@ -58,19 +47,24 @@ public class OrderApi {
         return Response.status(Response.Status.OK).entity(response).build();
     }
 
+
     @GET
-    @Path("gs")
-    public Response test55() {
-        orderBean.setuserNameOne("gs8150");
-        String response = "OK";
-        return Response.status(Response.Status.OK).entity(response).build();
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrders() {
+        return Response.ok(orderBean.getOrders()).build();
     }
 
     @GET
-    @Path("as")
-    public Response test555() {
-        orderBean.setuserNameTwo("as4813");
-        String response = "OK";
-        return Response.status(Response.Status.OK).entity(response).build();
+    @Path("/{orderID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrdersbyID(@PathParam("orderID") Integer orderID) {
+        Order order = orderBean.getOrder(orderID);
+
+        if(order != null) {
+            return Response.ok(order).build();
+        }
+        else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 }
