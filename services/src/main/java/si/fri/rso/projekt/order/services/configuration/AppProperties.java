@@ -13,6 +13,27 @@ public class AppProperties {
     @ConfigValue(value = "external-services.enabled", watch = true)
     private boolean externalServicesEnabled;
 
+    @ConfigValue(value = "external-services.nameOne", watch = true)
+    private String externalServicesNameOne;
+
+    @ConfigValue(value = "external-services.nameTwo", watch = true)
+    private String externalServicesNameTwo;
+
+    public String externalServicesNameOne() {
+        return externalServicesNameOne;
+    }
+
+    public void externalServicesNameOne(String externalServicesNameOne) {
+        this.externalServicesNameOne = externalServicesNameOne;
+    }
+
+    public String externalServicesNameTwo() {
+        return externalServicesNameTwo;
+    }
+
+    public void externalServicesNameTwo(String externalServicesNameTwo) {
+        this.externalServicesNameTwo = externalServicesNameTwo;
+    }
 
     public boolean isExternalServicesEnabled() {
         return externalServicesEnabled;

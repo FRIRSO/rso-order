@@ -57,4 +57,20 @@ public class OrderApi {
         String response = "OK";
         return Response.status(Response.Status.OK).entity(response).build();
     }
+
+    @GET
+    @Path("gs")
+    public Response test55() {
+        orderBean.setuserNameOne("gs8150");
+        String response = "OK";
+        return Response.status(Response.Status.OK).entity(response).build();
+    }
+
+    @GET
+    @Path("as")
+    public Response test555() {
+        orderBean.setuserNameTwo("as4813");
+        String response = "OK";
+        return Response.status(Response.Status.OK).entity(response).build();
+    }
 }

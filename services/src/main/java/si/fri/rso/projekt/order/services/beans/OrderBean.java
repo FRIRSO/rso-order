@@ -28,7 +28,7 @@ public class OrderBean {
 
     @Inject
     @DiscoverService("rso-buyer")
-    private Optional<String> baseurl;
+    private Optional<String> url;
 
     @PostConstruct
     private void init() {
@@ -41,20 +41,28 @@ public class OrderBean {
     }
 
     public String readConfig() {
+
+        String output = "";
         if(appProperties.isExternalServicesEnabled())
-            return "ext service enabled!";
-        return "ext service disabled";
+            output += "ext service enabled!";
+
+        output += appProperties.externalServicesNameOne() + "\t" + appProperties.externalServicesNameTwo();
+        return output;
     }
 
     public void setConfig(boolean config) {
         appProperties.setExternalServicesEnabled(config);
     }
 
+    public void setuserNameOne(String userNameOne) { appProperties.externalServicesNameOne(userNameOne);}
+
+    public void setuserNameTwo(String userNameTwo) { appProperties.externalServicesNameTwo(userNameTwo);}
+
     public String getMessageDiscovery(){
-        if(baseurl.isPresent()) {
+        if(url.isPresent()) {
             try {
                 return httpClient
-                        .target(baseurl.get() + "/v1/buyers")
+                        .target(url.get() + "/v1/buyers")
                         .request()
                         .get(String.class);
             }
