@@ -39,6 +39,10 @@ public class OrderBean {
     @DiscoverService("rso-buyer")
     private Optional<String> url;
 
+    @Inject
+    @DiscoverService("rso-buyer")
+    private Optional<String> containerUrl;
+
     @PostConstruct
     private void init() {
         httpClient = ClientBuilder.newClient();
@@ -81,18 +85,19 @@ public class OrderBean {
 
 
     public String getMessageDiscovery2(){
-        if(url.isPresent()) {
+        if(containerUrl.isPresent()) {
             try {
                 return httpClient
-                        .target(url.get() + "/v1/buyers/test")
+                        .target(containerUrl.get() + "/v1/buyers/test")
                         .request()
                         .get(String.class);
             }
             catch (WebApplicationException | ProcessingException e) {
-                System.out.println("errror: " + url.get() + "\t " + e.getMessage());
+                System.out.println("errror: " + containerUrl.get() + "\t " + e.getMessage());
                 return "Sth went wrong!";
             }
         }
+        System.out.println("errror: sth went wring!");
         return "Sth went wrong!";
     }
 
