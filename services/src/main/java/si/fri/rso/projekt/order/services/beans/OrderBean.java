@@ -3,7 +3,7 @@ package si.fri.rso.projekt.order.services.beans;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
-import si.fri.rso.projekt.buyers.models.Buyer;
+//import si.fri.rso.projekt.buyers.models.Buyer;
 import si.fri.rso.projekt.order.services.configuration.AppProperties;
 import si.fri.rso.projekt.order.models.MongoOrder;
 import si.fri.rso.projekt.order.models.Order;
@@ -61,11 +61,11 @@ public class OrderBean {
     }
 
 
-    private List<Buyer> getObjects(String json) throws IOException {
-        return json == null ? new ArrayList<>() : objectMapper.readValue(json,
-                objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).getTypeFactory().constructCollectionType(List.class, Buyer.class));
-    }
-    public List<Buyer> getMessageDiscovery(){
+    //private List<Buyer> getObjects(String json) throws IOException {
+    //    return json == null ? new ArrayList<>() : objectMapper.readValue(json,
+    //            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).getTypeFactory().constructCollectionType(List.class, Buyer.class));
+    //}
+    /*public List<Buyer> getMessageDiscovery(){
         if(url.isPresent()) {
             try {
                 return httpClient
@@ -81,7 +81,7 @@ public class OrderBean {
             }
         }
         return null;
-    }
+    }*/
 
 
     public String getMessageDiscovery2(){

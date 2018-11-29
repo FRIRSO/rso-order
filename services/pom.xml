@@ -36,10 +36,6 @@
             <groupId>si.fri.rso.projekt</groupId>
             <artifactId>orders-models</artifactId>
         </dependency>
-        <dependency>
-            <groupId>si.fri.rso.projekt</groupId>
-            <artifactId>buyers-models</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

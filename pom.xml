@@ -26,7 +26,6 @@
         <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
     </properties>
 
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -88,12 +87,6 @@
             <dependency>
                 <groupId>si.fri.rso.projekt</groupId>
                 <artifactId>orders-api</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>si.fri.rso.projekt</groupId>
-                <artifactId>buyers-models</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
