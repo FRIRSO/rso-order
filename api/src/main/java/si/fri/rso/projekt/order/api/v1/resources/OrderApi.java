@@ -17,12 +17,12 @@ public class OrderApi {
     private OrderBean orderBean;
 
 
-    @GET
-    @Path("url")
-    public Response test() {
-        return Response.status(Response.Status.OK).entity(orderBean.getMessageDiscovery()).build();
-
-    }
+    //@GET
+    //@Path("url")
+    //public Response test() {
+    //    return Response.status(Response.Status.OK).entity(orderBean.getMessageDiscovery()).build();
+    //
+    //}
 
     @GET
     @Path("url2")
