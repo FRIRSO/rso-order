@@ -1,5 +1,4 @@
-package si.fri.rso.projekt.orders.models;
-
+package si.fri.rso.projekt.order.models;
 
 public class Order {
 
@@ -13,6 +12,10 @@ public class Order {
         this.restaurantID = restaurantID;
         this.billID = billID;
         this.buyerID = buyerID;
+    }
+
+    public Order() {
+        super();
     }
 
     public int getOrderID() {

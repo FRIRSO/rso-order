@@ -1,6 +1,5 @@
-package si.fri.rso.projekt.orders.models;
+package si.fri.rso.projekt.order.models;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -8,7 +7,6 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;

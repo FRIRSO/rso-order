@@ -1,10 +1,12 @@
 package si.fri.rso.projekt.order.services.beans;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
+import si.fri.rso.projekt.buyers.models.Buyer;
 import si.fri.rso.projekt.order.services.configuration.AppProperties;
-import si.fri.rso.projekt.orders.models.MongoOrder;
-import si.fri.rso.projekt.orders.models.Order;
+import si.fri.rso.projekt.order.models.MongoOrder;
+import si.fri.rso.projekt.order.models.Order;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -13,6 +15,10 @@ import javax.ws.rs.ProcessingException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -51,21 +57,43 @@ public class OrderBean {
     }
 
 
-    public String getMessageDiscovery(){
+    private List<Buyer> getObjects(String json) throws IOException {
+        return json == null ? new ArrayList<>() : objectMapper.readValue(json,
+                objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).getTypeFactory().constructCollectionType(List.class, Buyer.class));
+    }
+    public List<Buyer> getMessageDiscovery(){
         if(url.isPresent()) {
             try {
                 return httpClient
                         .target(url.get() + "/v1/buyers")
+                        .request(MediaType.APPLICATION_JSON)
+                        .get(new GenericType<List<Buyer>>() {
+                        });
+            }
+            catch (WebApplicationException | ProcessingException e) {
+                System.out.println("errror: " + url.get() + "\t " + e.getMessage());
+                //throw new InternalServerErrorException(e.getMessage());
+                return null;
+            }
+        }
+        return null;
+    }
+
+
+    public String getMessageDiscovery2(){
+        if(url.isPresent()) {
+            try {
+                return httpClient
+                        .target(url.get() + "/v1/buyers/test")
                         .request()
                         .get(String.class);
             }
             catch (WebApplicationException | ProcessingException e) {
-                //throw new InternalServerErrorException(e.getMessage());
-                return e.getMessage();
+                System.out.println("errror: " + url.get() + "\t " + e.getMessage());
+                return "Sth went wrong!";
             }
         }
-
-        return "baseUrl is not present!";
+        return "Sth went wrong!";
     }
 
     public List<Order> getOrders() {

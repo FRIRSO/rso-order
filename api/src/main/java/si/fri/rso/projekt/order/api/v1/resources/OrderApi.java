@@ -1,7 +1,7 @@
 package si.fri.rso.projekt.order.api.v1.resources;
 
 import si.fri.rso.projekt.order.services.beans.OrderBean;
-import si.fri.rso.projekt.orders.models.Order;
+import si.fri.rso.projekt.order.models.Order;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,8 +20,14 @@ public class OrderApi {
     @GET
     @Path("url")
     public Response test() {
-        String response = orderBean.getMessageDiscovery();
-        return Response.status(Response.Status.OK).entity(response).build();
+        return Response.status(Response.Status.OK).entity(orderBean.getMessageDiscovery()).build();
+
+    }
+
+    @GET
+    @Path("url2")
+    public Response test2() {
+        return Response.status(Response.Status.OK).entity(orderBean.getMessageDiscovery2()).build();
 
     }
 
