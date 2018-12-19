@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -101,9 +103,12 @@ public class OrderBean {
         return "Sth went wrong!";
     }
 
+
     public List<Order> getOrders() {
         MongoOrder mb = new MongoOrder();
 
+        //log.info("get order log call");
+        log.logp(Level.INFO, "OrderBean", "getOrders()", "getOrders call");
         return mb.getAllOrders();
     }
 

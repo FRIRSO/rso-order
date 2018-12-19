@@ -1,5 +1,7 @@
 package si.fri.rso.projekt.order.api.v1.resources;
 
+import com.kumuluz.ee.logs.cdi.Log;
+import com.kumuluz.ee.logs.cdi.LogParams;
 import si.fri.rso.projekt.order.services.beans.OrderBean;
 import si.fri.rso.projekt.order.models.Order;
 
@@ -10,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @RequestScoped
+@Log
 @Path("orders")
 public class OrderApi {
 
