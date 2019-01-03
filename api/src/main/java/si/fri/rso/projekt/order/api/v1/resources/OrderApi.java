@@ -51,6 +51,13 @@ public class OrderApi {
     }
 
     @GET
+    @Path("healthyFalse")
+    public Response serviceHealthyFalse() {
+        restProperties.setHealthy(false);
+        return Response.status(Response.Status.OK).entity("OK").build();
+    }
+
+    @GET
     @Path("disable")
     public Response test4() {
         orderBean.setConfig(false);
