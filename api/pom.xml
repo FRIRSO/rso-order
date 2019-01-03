@@ -31,6 +31,10 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>com.kumuluz.ee.health</groupId>
+            <artifactId>kumuluzee-health</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.kumuluz.ee.logs</groupId>
             <artifactId>kumuluzee-logs-log4j2</artifactId>
         </dependency>

@@ -42,4 +42,5 @@ public class AppProperties {
     public void setExternalServicesEnabled(boolean externalServicesEnabled) {
         this.externalServicesEnabled = externalServicesEnabled;
     }
+
 }

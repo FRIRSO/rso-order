@@ -2,6 +2,7 @@ package si.fri.rso.projekt.order.api.v1.resources;
 
 import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.logs.cdi.LogParams;
+import si.fri.rso.projekt.order.api.v1.configuration.RestProperties;
 import si.fri.rso.projekt.order.services.beans.OrderBean;
 import si.fri.rso.projekt.order.models.Order;
 
@@ -18,6 +19,9 @@ public class OrderApi {
 
     @Inject
     private OrderBean orderBean;
+
+    @Inject
+    private RestProperties restProperties;
 
 
     //@GET
@@ -38,6 +42,12 @@ public class OrderApi {
     @Path("service")
     public Response service() {
         return Response.status(Response.Status.OK).entity(orderBean.readConfig()).build();
+    }
+
+    @GET
+    @Path("healthy")
+    public Response serviceHealthy() {
+        return Response.status(Response.Status.OK).entity(restProperties.isHealthy()).build();
     }
 
     @GET
