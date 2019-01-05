@@ -2,6 +2,10 @@ package si.fri.rso.projekt.order.api.v1.resources;
 
 import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.logs.cdi.LogParams;
+import org.eclipse.microprofile.metrics.Counter;
+import org.eclipse.microprofile.metrics.annotation.Metered;
+import org.eclipse.microprofile.metrics.annotation.Metric;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.rso.projekt.order.api.v1.configuration.RestProperties;
 import si.fri.rso.projekt.order.services.beans.OrderBean;
 import si.fri.rso.projekt.order.models.Order;
@@ -23,6 +27,9 @@ public class OrderApi {
     @Inject
     private RestProperties restProperties;
 
+    //@Inject
+    //@Metric(name = "order_counter")
+    //private Counter orderCounter;
 
     //@GET
     //@Path("url")
@@ -40,6 +47,8 @@ public class OrderApi {
 
     @GET
     @Path("service")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Metered(name = "service_meter")
     public Response service() {
         return Response.status(Response.Status.OK).entity(orderBean.readConfig()).build();
     }
@@ -75,6 +84,7 @@ public class OrderApi {
 
 
     @GET
+    @Timed(name = "get_orders_timer")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrders() {
         return Response.ok(orderBean.getOrders()).build();
