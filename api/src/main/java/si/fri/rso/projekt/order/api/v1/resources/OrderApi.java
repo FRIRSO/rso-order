@@ -31,12 +31,6 @@ public class OrderApi {
     //@Metric(name = "order_counter")
     //private Counter orderCounter;
 
-    //@GET
-    //@Path("url")
-    //public Response test() {
-    //    return Response.status(Response.Status.OK).entity(orderBean.getMessageDiscovery()).build();
-    //
-    //}
 
     @GET
     @Path("url2")
