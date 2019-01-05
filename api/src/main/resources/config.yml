@@ -30,7 +30,9 @@ kumuluzee:
       - name: metricsEndpoint
         url-pattern: /metrics/*
       - name: order-endpoint
-        url-pattern: /v1/orders/*
+        url-pattern: /v1/orders
+      - name: order-service
+        url-pattern: /v1/orders/service
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                     <Configuration name="order">
                         <Appenders>
