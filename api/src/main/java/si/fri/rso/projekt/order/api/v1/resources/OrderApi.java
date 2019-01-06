@@ -77,6 +77,7 @@ public class OrderApi {
     ///@Timed(name = "get_orders_timer")
     ///@Produces(MediaType.APPLICATION_JSON)
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getOrders() {
         return Response.ok(orderBean.getOrders()).build();
     }
