@@ -45,8 +45,8 @@ public class OrderApi {
 
     @GET
     @Path("service")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Counted(name = "order_gauge")
+    ///@Produces(MediaType.APPLICATION_JSON)
+    ///@Counted(name = "order_gauge")
     public Response service() {
         return Response.status(Response.Status.OK).entity(orderBean.readConfig()).build();
     }
@@ -82,8 +82,8 @@ public class OrderApi {
 
 
     @GET
-    @Timed(name = "get_orders_timer")
-    @Produces(MediaType.APPLICATION_JSON)
+    ///@Timed(name = "get_orders_timer")
+    ///@Produces(MediaType.APPLICATION_JSON)
     public Response getOrders() {
         return Response.ok(orderBean.getOrders()).build();
     }
