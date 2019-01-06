@@ -2,9 +2,9 @@ package si.fri.rso.projekt.order.api.v1.resources;
 
 import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.logs.cdi.LogParams;
-import org.eclipse.microprofile.metrics.Counter;
-import org.eclipse.microprofile.metrics.MetricUnits;
-import org.eclipse.microprofile.metrics.annotation.*;
+//import org.eclipse.microprofile.metrics.Counter;
+//import org.eclipse.microprofile.metrics.MetricUnits;
+//import org.eclipse.microprofile.metrics.annotation.*;
 import si.fri.rso.projekt.order.api.v1.configuration.RestProperties;
 import si.fri.rso.projekt.order.services.beans.OrderBean;
 import si.fri.rso.projekt.order.models.Order;
