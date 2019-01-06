@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 //import si.fri.rso.projekt.buyers.models.Buyer;
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.fri.rso.projekt.order.services.configuration.AppProperties;
 import si.fri.rso.projekt.order.models.MongoOrder;
 import si.fri.rso.projekt.order.models.Order;
@@ -11,6 +14,7 @@ import si.fri.rso.projekt.order.models.Order;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
@@ -39,10 +43,6 @@ public class OrderBean {
 
     @Inject
     @DiscoverService("rso-buyer")
-    private Optional<String> url;
-
-    @Inject
-    @DiscoverService("rso-buyer")
     private Optional<String> containerUrl;
 
     @PostConstruct
@@ -57,34 +57,9 @@ public class OrderBean {
         return "ext service disabled";
     }
 
-
     public void setConfig(boolean config) {
         appProperties.setExternalServicesEnabled(config);
     }
-
-
-    //private List<Buyer> getObjects(String json) throws IOException {
-    //    return json == null ? new ArrayList<>() : objectMapper.readValue(json,
-    //            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).getTypeFactory().constructCollectionType(List.class, Buyer.class));
-    //}
-    /*public List<Buyer> getMessageDiscovery(){
-        if(url.isPresent()) {
-            try {
-                return httpClient
-                        .target(url.get() + "/v1/buyers")
-                        .request(MediaType.APPLICATION_JSON)
-                        .get(new GenericType<List<Buyer>>() {
-                        });
-            }
-            catch (WebApplicationException | ProcessingException e) {
-                System.out.println("errror: " + url.get() + "\t " + e.getMessage());
-                //throw new InternalServerErrorException(e.getMessage());
-                return null;
-            }
-        }
-        return null;
-    }*/
-
 
     public String getMessageDiscovery2(){
         if(containerUrl.isPresent()) {
@@ -95,14 +70,33 @@ public class OrderBean {
                         .get(String.class);
             }
             catch (WebApplicationException | ProcessingException e) {
-                System.out.println("errror: " + containerUrl.get() + "\t " + e.getMessage());
                 return "Sth went wrong!";
             }
         }
-        System.out.println("errror: sth went wring!");
-        return "Sth went wrong!";
+        return "<empty string>";
     }
 
+    @CircuitBreaker(requestVolumeThreshold = 2)
+    @Fallback(fallbackMethod = "getBuyersTestFallback")
+    @Timeout
+    public String getMesageFromBuyersFallback(){
+        if(containerUrl.isPresent()) {
+            try {
+                return httpClient
+                        .target(containerUrl.get() + "/v1/buyers/fb")
+                        .request()
+                        .get(String.class);
+            }
+            catch (WebApplicationException | ProcessingException e) {
+                throw new InternalServerErrorException(e);
+            }
+        }
+        return null;
+    }
+
+    public String getBuyersTestFallback() {
+        return "getBuyersFallback call";
+    }
 
     public List<Order> getOrders() {
         MongoOrder mb = new MongoOrder();
@@ -114,9 +108,7 @@ public class OrderBean {
 
     public Order getOrder(Integer orderID) {
         MongoOrder mb = new MongoOrder();
-
         Order order = mb.getOrder(orderID);
-
         if(orderID == null) {
             return null;
         }

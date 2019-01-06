@@ -35,7 +35,12 @@ public class OrderApi {
     @Path("url2")
     public Response test2() {
         return Response.status(Response.Status.OK).entity(orderBean.getMessageDiscovery2()).build();
+    }
 
+    @GET
+    @Path("ft")
+    public Response faultTolerance() {
+        return Response.status(Response.Status.OK).entity(orderBean.getMesageFromBuyersFallback()).build();
     }
 
     @GET
