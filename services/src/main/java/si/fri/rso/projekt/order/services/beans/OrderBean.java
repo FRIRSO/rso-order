@@ -61,21 +61,6 @@ public class OrderBean {
         appProperties.setExternalServicesEnabled(config);
     }
 
-    public String getMessageDiscovery2(){
-        if(containerUrl.isPresent()) {
-            try {
-                return httpClient
-                        .target(containerUrl.get() + "/v1/buyers/test")
-                        .request()
-                        .get(String.class);
-            }
-            catch (WebApplicationException | ProcessingException e) {
-                return "Sth went wrong!";
-            }
-        }
-        return "<empty string>";
-    }
-
     @CircuitBreaker(requestVolumeThreshold = 2)
     @Fallback(fallbackMethod = "getBuyersTestFallback")
     @Timeout
@@ -83,7 +68,7 @@ public class OrderBean {
         if(containerUrl.isPresent()) {
             try {
                 return httpClient
-                        .target(containerUrl.get() + "/v1/buyers/fb")
+                        .target(containerUrl.get() + "/v1/buyers/test")
                         .request()
                         .get(String.class);
             }
