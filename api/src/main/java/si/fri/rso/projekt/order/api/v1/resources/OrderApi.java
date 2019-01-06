@@ -43,10 +43,10 @@ public class OrderApi {
         return Response.status(Response.Status.OK).entity(orderBean.getMesageFromBuyersFallback()).build();
     }
 
-    @GET
-    @Path("service")
     ///@Produces(MediaType.APPLICATION_JSON)
     ///@Counted(name = "order_gauge")
+    @GET
+    @Path("service")
     public Response service() {
         return Response.status(Response.Status.OK).entity(orderBean.readConfig()).build();
     }
@@ -81,9 +81,9 @@ public class OrderApi {
     }
 
 
-    @GET
     ///@Timed(name = "get_orders_timer")
     ///@Produces(MediaType.APPLICATION_JSON)
+    @GET
     public Response getOrders() {
         return Response.ok(orderBean.getOrders()).build();
     }
