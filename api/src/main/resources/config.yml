@@ -17,15 +17,11 @@ kumuluzee:
     servlet:
       mapping: /health
       enabled: true
-    logs:
-      enabled: true
-      level: INFO
-      period-s: 30
     checks:
       disk-space-health-check:
         threshold: 100000000
   logs:
-    config-file:  '<?xml version="1.0" encoding="UTF-8"?>
+    config-file: '<?xml version="1.0" encoding="UTF-8"?>
                       <Configuration name="order">
                           <Appenders>
                               <Console name="console" target="SYSTEM_OUT">
